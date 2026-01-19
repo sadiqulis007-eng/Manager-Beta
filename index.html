@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Manager App</title>
+
+  <!-- ✅ CSS LINK -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+ <div class="app-frame">
+
+  <!-- TOP HEADER -->
+  <div class="top-bar">
+    <div class="money-box">
+      <img src="icons/taka.png" class="money-icon">
+      <div class="money-pill">
+        <span id="balance" style="margin-left:4px;">0</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tab-bar">
+    <button class="tab-btn" data-target="money">
+      <img src="icons/money.png" class="icon">
+    </button>
+
+    <button class="tab-btn active" data-target="todo">
+      <img src="icons/todo.png" class="icon">
+    </button>
+
+    <button class="tab-btn" data-target="notes">
+      <img src="icons/notes.png" class="icon">
+    </button>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="content-area">
+
+    <!-- MONEY SCREEN -->
+    <div class="screen" id="screen-money">
+      <div id="moneyApp">
+        <div id="moneyTitleBar">
+          <span id="moneyTitle">Money Manager</span>
+        </div>
+
+        <div class="content" id="contentArea">
+          <div class="history" id="historyList">
+            <h3>Transaction History</h3>
+          </div>
+        </div>
+
+        <div class="fab" id="fab">+</div>
+
+        <div class="options" id="optionsMenu">
+          <button id="depositBtn">Cash In</button>
+          <button id="withdrawBtn">Cash Out</button>
+          <button id="resetBtn">Reset</button>
+        </div>
+
+        <div class="modal" id="modal">
+          <div class="modal-content">
+            <h3 id="modalTitle">Deposit</h3>
+            <input type="number" id="amountInput" placeholder="Enter amount" min="0">
+            <textarea id="reasonInput" placeholder="Reason (for withdrawal only)"></textarea>
+            <button id="submitBtn">Submit</button>
+            <button class="close-btn" id="closeBtn">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TODO SCREEN -->
+    <div class="screen active" id="screen-todo">
+      <div id="todoApp" style="height:100%;display:flex;flex-direction:column;position:relative;">
+
+        <div id="todoTitleBar">
+          <span id="todoTitle">To Do List</span>
+        </div>
+
+        <div class="list-container">
+          <ul id="todoList"></ul>
+        </div>
+
+        <button id="plusBtn">+</button>
+
+        <!-- ADD TASK MODAL -->
+        <div class="modal-simple" id="taskModal">
+          <div class="modal-box">
+            <h3>Add New Task</h3>
+            <input type="text" id="taskInput" placeholder="Enter task...">
+            <input type="time" id="taskTime">
+            <div class="modal-buttons">
+              <button id="cancelTaskBtn" class="cancel-btn">Cancel</button>
+              <button id="addTaskBtn" class="ok-btn">Add</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- NOTES SCREEN -->
+    <div class="screen" id="screen-notes">
+      <div id="notesApp" style="height:100%;display:flex;flex-direction:column;position:relative;">
+
+        <div id="notesTitleBar">
+          <span id="notesTitle">My Notes</span>
+        </div>
+
+        <div class="list-container" id="notesContainer">
+          <ul id="notesList"></ul>
+        </div>
+
+        <button id="addNoteBtn">+</button>
+
+        <!-- NOTES PLUS MENU -->
+        <div id="notesPlusMenu">
+          <button id="optAddNote">Add Note</button>
+          <button id="optSetPin">Set PIN</button>
+          <button id="optChangePin">Change PIN</button>
+        </div>
+
+        <!-- PIN MODAL -->
+        <div class="modal-simple" id="pinModal">
+          <div class="modal-box">
+            <h3 id="pinTitle">PIN</h3>
+
+            <input type="password" id="pinOld"
+              placeholder="Current PIN" inputmode="numeric" maxlength="6">
+
+            <input type="password" id="pinNew"
+              placeholder="New PIN" inputmode="numeric" maxlength="6">
+
+            <input type="password" id="pinConfirm"
+              placeholder="Confirm New PIN" inputmode="numeric" maxlength="6">
+
+            <div class="pin-error" id="pinError"></div>
+
+            <div class="modal-buttons">
+              <button class="ok-btn" id="pinOk">OK</button>
+              <button class="cancel-btn" id="pinCancel">Cancel</button>
+            </div>
+
+            <button id="pinDeleteBtn" class="delete-pin-full"
+              style="background:#f12b2b;color:white;border:none;
+              padding:12px;border-radius:6px;display:none;">
+              Delete PIN
+            </button>
+          </div>
+        </div>
+
+        <!-- ADD / EDIT NOTE MODAL -->
+        <div class="modal-simple" id="notesModal">
+          <div class="modal-box">
+            <h3 id="notesModalTitle">Add Note</h3>
+
+            <input type="text" id="noteTitleInput" placeholder="Note title">
+            <textarea id="noteInput" placeholder="Write note..." rows="4"></textarea>
+
+            <div class="modal-buttons">
+              <button class="ok-btn" id="confirmAddNote">Save</button>
+              <button class="cancel-btn" id="cancelAddNote">Cancel</button>
+            </div>
+          </div>
+        </div>
+  </div>
+</div>
+
+<!-- UNIVERSAL CONFIRM POPUP -->
+<div id="confirmPopup">
+  <div style="background:white;padding:20px;border-radius:10px;width:280px;text-align:center;">
+    <p id="confirmText" style="color:black;font-size:16px;margin-bottom:15px;">Are you sure?</p>
+    <button id="confirmYes"
+      style="width:100%;padding:10px;background:#00d227;border:none;border-radius:6px;margin-bottom:8px;cursor:pointer;">
+      Yes
+    </button>
+    <button id="confirmNo"
+      style="width:100%;padding:10px;background:red;color:white;border:none;border-radius:6px;cursor:pointer;">
+      No
+    </button>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
+
+</body>
+</html>

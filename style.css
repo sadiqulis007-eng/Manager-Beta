@@ -1,0 +1,589 @@
+*{ margin:0; padding:0; box-sizing:border-box; font-family:Arial, sans-serif; }
+
+  body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    background:#ffffff;
+  }
+
+  .app-frame{
+    width:100%;
+    max-width:100%;
+    height: 100vh;
+    min-height:100%;
+    display:flex;
+    flex-direction:column;
+  }
+
+  /* TOP HEADER (money + menu) */
+  .top-bar{
+    height:100px;
+    background-color:#5186f0;
+    padding:10px 12px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .money-box{
+  display:flex;
+  align-items:center;
+  height:45px;
+  width:170px;             
+  background:#EAF0FF;
+  border-radius:25px;       
+  border:3px solid rgb(83, 116, 146);
+  padding-left:0px;         
+}
+
+/* ICON INSIDE LEFT EDGE */
+
+.money-icon {
+  width: 43px;
+  height: 43px;
+  object-fit: contain;
+  margin-right: 4px;
+}
+
+
+.money-pill{
+  font-size:22px;
+  font-weight: bold;
+  flex:1;
+}
+
+.tab-btn .icon {
+  width: 32px;      
+  height: 32px;      
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;    
+}
+
+  /* TAB BAR */
+  .tab-bar{
+    height:40px;
+    border-bottom:1px solid #ddd;
+    display:flex;
+  }
+
+  .tab-btn{
+    flex:1;
+    border:none;
+    background:#5186f0;
+    font-size:14px;
+    cursor:pointer;
+    border-right:2px solid #000000;
+  }
+  .tab-btn:last-child{
+    border-right:none;
+  }
+  .tab-btn.active{ 
+  font-weight:bold; 
+  border-bottom:1px solid white;
+  background:#fff;
+ }
+
+  /* MAIN CONTENT AREA */
+  .content-area{
+    flex:1;
+    overflow:hidden;
+    position:relative;
+  }
+
+  .screen{
+    position:absolute;
+    inset:0;
+    display:none;
+    padding:10px;
+    overflow:hidden;
+  }
+  .screen.active{
+    display:block;
+  }
+
+  /* ==== MONEY SCREEN STYLES (INSIDE AREA) ==== */
+  #moneyApp{
+    display:flex;
+    flex-direction:column;
+    height:100%;
+  }
+
+  #moneyApp .content{
+    flex:1;
+    overflow-y:auto;
+    direction:rtl;
+    border-radius:8px;
+    background:#fdfdfd;
+    padding-right:10px;
+  }
+  #moneyApp .history{
+    direction:ltr;
+    padding:10px;
+  }
+
+  .fab{
+    position:absolute;
+    bottom:20px;
+    right:20px;
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    background:#00d227;
+    color:#000;
+    font-size:38px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    box-shadow:0 4px 10px rgba(0,0,0,0.3);
+    line-height:1;
+  }
+
+  .options{
+    position:absolute;
+    bottom:90px;
+    right:20px;
+    display:none;
+    flex-direction:column;
+    background:#fff;
+    padding:10px;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.3);
+  }
+  .options button{
+    margin:4px 0;
+    padding:8px;
+    border:none;
+    border-radius:6px;
+    background:#90ee90;
+    cursor:pointer;
+  }
+  #resetBtn{background:#d2b48c;}
+
+  .modal{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    background:rgba(0,0,0,0.5);
+    z-index:2000;
+  }
+  .modal-content{
+    background:#fff;
+    padding:20px;
+    border-radius:10px;
+    width:300px;
+    text-align:center;
+  }
+  .modal-content input,
+  .modal-content textarea{
+    width:100%;
+    padding:8px;
+    margin:8px 0;
+    border-radius:5px;
+    border:1px solid #ccc;
+  }
+  .modal-content button{
+    width:100%;
+    padding:8px;
+    margin-top:5px;
+    border-radius:5px;
+    cursor:pointer;
+    background:#90ee90;
+    border:none;
+  }
+  .modal-content .close-btn{
+    background:red;
+    color:#fff;
+  }
+  .transaction{
+  background:#d9f1d9;       
+
+  padding:12px 16px;         
+  margin:6px -10px;          
+
+  border-radius:8px;
+
+  display:flex;
+  flex-direction:column;
+}
+ 
+
+  .transaction span{
+    word-wrap:break-word;
+    overflow-wrap:anywhere;
+  }
+  .transaction .delete-btn{
+    align-self:flex-end;
+    background:red;
+    color:black;
+    padding:4px 6px;
+    border:none;
+    border-radius:3px;
+    cursor:pointer;
+    font-size:12px;
+  }
+
+  /* ==== TODO + NOTES COMMON LIST STYLES ==== */
+  .list-container{
+    margin-top:5px;
+    height:calc(100% - 5px);
+    overflow-y:auto;
+  }
+  ul{list-style:none;}
+
+  li{
+    padding:12px;
+    margin-bottom:6px;
+    background:#e7ecf9;
+    color:#000;
+    border-radius:6px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    word-wrap:break-word;
+    overflow-wrap:anywhere;
+  }
+  #notesList li{
+  background:#e7dff5; 
+}
+  .task-old{
+  background:#db8e8e !important; /* light red */
+}
+
+  .button-group{display:flex;}
+  li button{
+    margin-left:4px;
+    padding:4px 8px;
+    border:none;
+    border-radius:4px;
+    font-size:14px;
+    cursor:pointer;
+  }
+  .delete-btn{background:#f12b2b;color:#000;}
+  .done-btn{background:#51e070;color:#000;}
+
+  /* Floating add buttons for todo/notes */
+  #plusBtn,
+  #addNoteBtn{
+    position:absolute;
+    bottom:20px;
+    right:20px;
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    font-size:38px;
+    border:none;
+    cursor:pointer;
+    box-shadow:0 4px 8px rgba(0,0,0,0.3);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    line-height:1;
+  }
+  #plusBtn{background:#5186f0;color:#fff;}
+  #addNoteBtn{background:#e3ccff;color:#000;}
+
+  /* popup for todo & notes */
+  .modal-simple{
+    position:fixed;
+    top:0;left:0;
+    width:100%;height:100%;
+    background:rgba(0,0,0,0.5);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:2000;
+  }
+  .modal-box{
+    background:#fff;
+    padding:20px;
+    width:80%;
+    max-width:300px;
+    border-radius:12px;
+    text-align:center;
+    color:black;
+  }
+  .modal-box input,
+  .modal-box textarea{
+    width:100%;
+    padding:10px;
+    margin-top:10px;
+    font-size:16px;
+    border-radius:6px;
+    border:1px solid #aaa;
+    color:black;
+  }
+  .modal-buttons{
+  display:flex;
+  margin-top:15px;
+  gap:10px;                
+}
+
+/* Cancel → LEFT */
+.modal-buttons .cancel-btn{
+  flex:1;
+  background:#f12b2b;
+  color:white;
+  padding:10px;
+  border:none;
+  border-radius:6px;
+  font-size:16px;
+  order:1;
+}
+
+/* OK / Add → RIGHT */
+.modal-buttons .ok-btn{
+  flex:1;
+  background:#007bff;
+  color:white;
+  padding:10px;
+  border:none;
+  border-radius:6px;
+  font-size:16px;
+  order:2;
+}
+
+  /* ===== MONEY / TODO / NOTES TITLE BAR (100% SAME SIZE) ===== */
+
+#moneyTitleBar,
+#todoTitleBar,
+#notesTitleBar{
+  height:36px;
+  line-height:36px;        
+  padding:0;
+  margin-bottom:6px;
+  border-radius:6px;
+
+  display:block;           
+  text-align:center;
+
+  font-size:16px;
+  font-weight:bold;
+  box-sizing:border-box;
+}
+
+/* individual colors */
+#moneyTitleBar{
+  background:rgb(0, 177, 0);
+  color:black;
+}
+
+#todoTitleBar{
+  background:#5186f0;
+  color:white;
+}
+
+#notesTitleBar{
+  background:#c8acea;
+  color:black;
+}
+
+  /* APP HISTORY */
+  #appHistoryList p.entry{
+    padding:8px;
+    border-bottom:1px solid #eee;
+    margin:0;
+    font-size:14px;
+    word-wrap:break-word;
+    overflow-wrap:anywhere;
+  }
+
+  /* UNIVERSAL CONFIRM POPUP */
+  #confirmPopup{
+    position:fixed;
+    top:0;left:0;
+    width:100%;height:100%;
+    background:rgba(0,0,0,0.5);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:99999;
+  }
+  /* NOTES PIN SYSTEM */
+#notesPlusMenu{
+  position:absolute;
+  bottom:90px;
+  right:20px;
+  background:#fff;
+  border-radius:10px;
+  box-shadow:0 4px 12px rgba(0,0,0,.3);
+  display:none;
+  flex-direction:column;
+  z-index:3000;
+}
+#notesPlusMenu button{
+  padding:10px 14px;
+  border:none;
+  background:white;
+  text-align:left;
+  cursor:pointer;
+}
+#notesPlusMenu button:hover{background:#f0f0f0;}
+
+.pin-error{
+  color:red;
+  font-size:14px;
+  margin-top:6px;
+}
+.modal-box,
+.modal-content,
+#confirmPopup > div{
+  box-shadow:
+    0 12px 30px rgba(0,0,0,0.18);
+}
+
+/* ===== INSTAGRAM STYLE DRAG SWIPE ===== */
+.screen{
+  transition: transform 0.25s cubic-bezier(0.22,0.61,0.36,1);
+  will-change: transform;
+}
+
+.screen.dragging{
+  transition: none !important;
+}
+
+/* ===== TODO TASK CARD (FINAL FIXED LAYOUT) ===== */
+#todoStatusTitle{
+  margin-bottom:8px;
+  font-size:15px;
+  font-weight:600;
+}
+
+
+#todoList{
+  padding:0;
+}
+
+#todoList li{
+  padding:12px;
+  margin-bottom:6px;
+  background:#e7ecf9;
+  border-radius:6px;
+
+  display:flex;
+  flex-direction:column;        
+  align-items:flex-start;      
+}
+
+.task-old{
+  background:#db8e8e !important; 
+}
+
+.task-text{
+  font-size:15px;
+}
+
+/* footer row */
+.task-footer{
+  width:100%;                   
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:6px;
+}
+
+/* date */
+.task-date{
+  font-size:12px;
+  opacity:0.7;
+}
+
+/* buttons */
+.button-group{
+  display:flex;
+  gap:6px;
+}
+/* COMMON CARD LAYOUT (TODO + NOTES) */
+.note-card{
+  padding:12px;
+  margin-bottom:6px;
+  background:#e7ecf9;
+  border-radius:6px;
+
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+}
+
+.note-text{
+  font-size:15px;
+}
+
+.note-footer{
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:6px;
+}
+
+.note-date{
+  font-size:12px;
+  opacity:0.7;
+}
+
+.note-buttons{
+  display:flex;
+  gap:6px;
+}
+/* ===== ADD TASK EXTRA OPTIONS ===== */
+#taskTime{
+  width:100%;
+  padding:10px;
+  font-size:16px;
+  border-radius:6px;
+  border:1px solid #aaa;
+  margin-top:10px;
+  box-sizing:border-box;
+}
+
+/* ===== TASK START TIME – DEEP SMOOTH MULTI COLOR BG BLINK ===== */
+.task-blink {
+  animation: deepMultiBgBlink 4.5s ease-in-out infinite;
+}
+
+@keyframes deepMultiBgBlink {
+  0% {
+    background-color:#f88080 ;   
+  }
+  25% {
+    background-color: #fee980;  
+  }
+  50% {
+    background-color: #e7ecf9;   
+  }
+  75% {
+    background-color: #fee980;  
+  }
+  100% {
+    background-color: #f88080;   
+  }
+}
+
+.note-title{
+  font-size:16px;
+  font-weight:bold;
+  margin-bottom:4px;
+}
+.delete-pin-full {
+  width: calc(100%); /* same gap as modal-buttons */
+  margin-top: 10px;
+}
+#confirmPopup{
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.75);
+  z-index: 99999;
+
+  transform: none !important;   
+}
